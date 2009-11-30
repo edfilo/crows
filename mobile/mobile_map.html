@@ -1,0 +1,378 @@
+<?
+
+/*
+
+ * Crows - Crowd Syndication 1.0
+
+ * Copyright 2009
+
+ * contact@crowsne.st
+
+ * http://www.crowsne.st/license
+
+ */
+
+?>
+
+
+
+
+
+
+
+<div style="height:400px;" id="map"></div>
+
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=<?=$map_key;?>" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+
+
+var map;
+
+
+
+var makeMap=function(div,lat,lon,zoom,default_map_type) {
+
+
+
+	  if (GBrowserIsCompatible()) {
+
+	 //alert(lat);
+
+	 //alert(lon);
+
+	 //alert(zoom);
+
+	   	map = new GMap2(document.getElementById(div));
+
+	   // map.setCenter(new GLatLng(lat,lon,zoom));
+
+	   //map.setCenter(new GLatLng('40.00000','-79.00000','13'));
+
+	    map.setCenter(new GLatLng(lat,lon),zoom);
+
+		map.addControl(new GSmallMapControl());
+
+    	map.addControl(new GMapTypeControl());
+
+	    	geocoder = new GClientGeocoder();
+
+
+
+	   //	map.setMapType(default_map_type); 
+
+	   //	Ext.get('map_controls').update('<span class="link" onclick="bigMap();">fullscreen</span>');
+
+	  }
+
+}
+
+
+
+var parseReport=function(report){
+
+	
+
+	
+
+	
+
+	var html='<div class="bold">'+report.data.title+'</div>';
+
+	
+
+	if(report.data.author){
+
+		html+='<div>posted by '+report.data.author+' '+report.data.date+'</div>';
+
+	}else{
+
+		html+='<div>'+report.data.date+'</div>';
+
+	}
+
+    if(report.data.location){
+
+    	html+='<div>'+report.data.location+'</div>';
+
+    }
+
+	if(report.data.embed){
+
+		html+='</div>'+report.data.embed+'</div>';
+
+	}
+
+	
+
+	if(report.data.link){
+
+		//alert(link);
+
+		html+='<div><a href="'+report.data.link+'">'+report.data.link+'</a></div>';
+
+	}  
+
+	  
+
+	if(report.data.image){
+
+		//alert(link);
+
+		html+='<div><img src="'+report.data.image+'"></div>';
+
+	}
+
+	
+
+	if(report.data.report){
+
+		//alert(link);
+
+		html+='<div>'+report.data.report+'</div>';
+
+	}
+
+	return html;
+
+	
+
+	
+
+}
+
+	
+
+
+
+var showAddress=function(report,lat,long,blink){	
+
+		
+
+      var html=parseReport(report);
+
+	
+
+	  var icon = new GIcon();
+
+      icon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
+
+      icon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
+
+      icon.iconSize = new GSize(12, 20);
+
+      icon.shadowSize = new GSize(22, 20);
+
+      icon.iconAnchor = new GPoint(6, 20);
+
+      icon.infoWindowAnchor = new GPoint(5, 1);      
+
+      
+
+      var blinkicon = new GIcon();
+
+      blinkicon.image = "blinkypinb.gif";
+
+      blinkicon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
+
+      blinkicon.iconSize = new GSize(12, 20);
+
+      blinkicon.shadowSize = new GSize(22, 23);
+
+      blinkicon.iconAnchor = new GPoint(6, 20);
+
+      blinkicon.infoWindowAnchor = new GPoint(5, 1); 
+
+
+
+      iconblue = new GIcon(icon,"http://labs.google.com/ridefinder/images/mm_20_blue.png"); 
+
+      icongreen = new GIcon(icon,"http://labs.google.com/ridefinder/images/mm_20_green.png"); 
+
+      iconyellow = new GIcon(icon,"http://labs.google.com/ridefinder/images/mm_20_yellow.png"); 
+
+      iconred = new GIcon(icon,"http://labs.google.com/ridefinder/images/mm_20_red.png"); 
+
+
+
+
+
+	
+
+
+
+		if(lat){
+
+			var point = new GLatLng(lat,long);
+
+		
+
+			//var myicon = new GIcon(G_DEFAULT_ICON);
+
+			if(blink!='blink')var myicon = new GIcon(iconred);
+
+			
+
+			if(blink=='blink')var myicon = new GIcon(blinkicon);
+
+			  //myicon.image = "http://esa.ilmari.googlepages.com/markeryellow.png";
+
+			  //myicon.iconSize = new GSize(32, 32);
+
+			  //myicon.iconAnchor = new GPoint(15, 32); 
+
+			
+
+			if (point){
+
+				var marker = new GMarker(point,{icon:myicon});
+
+				map.addOverlay(marker);
+
+				GEvent.addListener(marker, "click", function() {
+
+					if(html.length>2500){var width=600;}else{var width=300;}
+
+					if(html.length>2500){var font=10;}else{var font=12;}
+
+					
+
+			      marker.openInfoWindowHtml('<div style="width:'+width+'px;font-size:'+font+'px;">'+html+'</div>');
+
+			    });
+
+			}
+
+		}
+
+	}
+
+	
+
+makeMap('map',<?=$latitude;?>,<?=$longitude;?>,<?=$zoom;?>);
+
+
+
+
+
+
+
+<?
+
+
+
+		
+
+		$handle = fopen("../reports.csv", "r");
+
+		while (($data = fgetcsv($handle, 1000, "|")) !== FALSE) {
+
+	
+
+				$reports[]=$data;
+
+			    $reports=array_reverse($reports);	    
+
+			
+
+		} 	
+
+ 	    $x=0;
+
+ 	    ?>
+
+ 	   
+
+ 	    
+
+ 	    <?
+
+		foreach($reports as $report){
+
+		//name location lat long description date title link photo video	
+
+					
+
+		
+
+		
+
+				$lat=$report[4];
+
+				$long=$report[5];
+
+		   
+
+				
+
+		
+
+				if($lat&&$long){
+
+				
+
+				
+
+				?>
+
+			
+
+				var report={};
+
+ 	    		report.data={};
+
+				report.data.date='<?=$report[0];?>';
+
+				report.data.title='<?=str_replace("'","\'",$report[1]);?>';
+
+				report.data.name='<?=str_replace("'","\'",$report[2]);?>';
+
+				report.data.location='<?=str_replace("'","\'",$report[3]);?>';
+
+				report.data.report='<?=str_replace("'","\'",$report[6]);?>';
+
+				report.data.link='<?=str_replace("'","\'",$report[7]);?>';
+
+				report.data.image='<?=str_replace("'","\'",$report[8]);?>';
+
+				report.data.embed='<?=str_replace("'","\'",$report[9]);?>';
+
+				
+
+		
+
+				
+
+				
+
+				
+
+				
+
+			   showAddress(report,<?=$lat;?>,<?=$long;?>);
+
+				
+
+				<?
+
+				}
+
+				$x++;
+
+		}
+
+		
+
+		
+
+
+
+
+
+?>
+
+
+
+</script>
+

@@ -1,0 +1,94 @@
+<?$password=$_POST['password'];?>
+
+<!--<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+	<title><?=$page_title;?></title>
+
+	<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <meta name="description" content="<?=$page_description;?>">
+	<meta name="keywords" content="<?=$page_keywords;?>">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<link rel="stylesheet" type="text/css" href="mobile.css">
+
+	
+</head>
+
+<body class="<?=$view;?>">
+	
+	<div id="header"  style="background-color:<?=$trim_background_color;?>;color:<?=$trim_font_color;?>">
+		<div id="logo"><a href="../mobile"><img src="../<?=$logo_url;?>"></a></div>
+		<div><?=$top_left_heading;?></div>
+	</div>
+	-->
+<form action="../report_form_handler.php" method="post" enctype="multipart/form-data" name="form" id="mobileform">
+     <h1>Report Form</h1>
+  	
+
+      <span class="label">Story Headline:</span><br>
+      <input name="headline" type="text" id="headline">
+
+      <br>
+      <span class="label">Your Name(Optional):</span><br>
+      <input name="name" type="text" id="name">
+      <br>
+      <span class="label">Location (Optional, please be specific for our map<br>
+      ie "1000 Fort Duquesne Blvd Pittsburgh"</span><br>      
+      <input type="text" name="location">
+      <br>
+      <span class="label">Report:</span><br>
+      <textarea name="report" id="text">
+      </textarea>
+      <br>
+      <span class="label">Website Link (Optional):<br>
+      <input name="link" type="text" id="link">
+      <br>
+      <span class="label">Image Link (Optional):<span class="label">
+      <br>
+      <input name="image" type="text" id="image">
+      <br>
+       <span class="label">Video Embed Code (Optional)</span>:
+      <br>
+      <input name="embed" type="text" id="embed">
+      <br>
+      <br>
+      
+       <?
+      if($password==$private_reporting_password){
+      	?>
+      	<input type="hidden" name="password" value="<?=md5($password);?>">
+      	<?
+      }
+       
+       
+      if($recaptcha){
+      	
+require_once('../recaptchalib.php');
+
+$recaptcha_html= recaptcha_get_html($recaptcha_public_key);
+      	echo($recaptcha_html);
+      }
+      ?>
+      
+      
+<input type="submit" name="Submit" value="Submit">
+      
+<!--<div style="clear:both;background-color:<?=$trim_background_color;?>;color:<?=$trim_font_color;?>;" id="footer">	
+
+	<br>contact <a href="<?=$contact_email;?>"><?=$contact_email;?></a>
+	
+ 	<br><br>powered by <a style="color:<?=$trim_font_color;?>;" href="crowsne.st">Crows</a>
+ 	
+ 	<br><br><a href="../?nomobile=true">Standard Site</a>
+    <br><br>
+</div>
+
+</body>
+
+</html>-->
+
+
+      
