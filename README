@@ -40,3 +40,9 @@ Google maps - site provides automatic geocoding to render  any location based da
 
 -Site is easily styled and made unique with your own logos,  text, images, colors, or CSS style rules
 
+Installation:
+upload contents  to your web directory
+make sure permissions are set to 666 in reports.csv
+edit config.php setting all the necessary values
+public reports can be edited or removed  reports.csv file
+
