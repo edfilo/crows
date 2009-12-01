@@ -1,3 +1,42 @@
-Crows is a super awesome site template that lets you make your own crowdsourced event coverage site.
+Crows
+Crowdsourced Syndication
+http://crowsne.st
 
-It's pretty rad.
+
+What is Crows?
+
+Crows is a Real Time Event Coverage and Communication System that
+allows people, groups, or organizations to easily create a web
+presence for coverage of live events. With the ability for users to
+contribute to the site on the internet or by using their mobile
+devices, website visitors are given up to the minute information that
+is curated live from the event itself.
+
+Features: 
+  
+Easily create and configure a  "crow" website on your server in minutes
+
+Show real time data pertaining to an event from any combination of built in  modules. 
+
+Reporting - allow site  visitors make real-time field reports directly to your site with optional  addresses,  photos, videos, and links via web or mobile phone.
+
+Twitter integration-  Display sets of tags, keywords, and  usernames.     Provide a main account for visitors to follow and easily introduce new hashtags for the event.
+
+Flickr integration - display and enlarge  photos uploaded to flickr  from a users account,  favorites , or search for public photos by tag.
+
+Youtube integration - Show a users videos,  playlist,  or search public videos by tag.
+
+Podcasting  - Import a standard podcast feed into the site for easy on-site playback of audio and video files 
+
+Google maps - site provides automatic geocoding to render  any location based data onto a configurable map.   Configurable  centering location, zoom level, and choose from 5 map types including sattellite, street, and google earth. 
+
+- All modules interact with each other in real time  through a "report" link next to all data ,  allowing for crowdsourced reporting by combining all chosen  media types into a centralized   map  and reporting module.  
+
+-Mobile Site detection and rendering for all mobile devices with browsers, including field reporting.
+
+-Re-captcha integration for spam prevention.  
+ 
+-Privacy settings to allow for public reporting or limit to private reporting through a password protected page. Malicious user  reports can be removed from site by owner.
+
+-Site is easily styled and made unique with your own logos,  text, images, colors, or CSS style rules
+

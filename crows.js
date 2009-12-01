@@ -56,13 +56,10 @@ Crows.launchReport=function(index){
 	
 	if(html.length>2000){var width=850;}else{var width=500;}
 	var reportwin=new Ext.Window({
-		//id:'contribute_modal'
 		closeAction:'destroy'
-		//,y:100
 		,anchorTo:'reports'
 		,id:'report_'+Math.random()
 		,autoHeight:true
-		//,autoWidth:true
 		,width:width
 		,footer:false
 		,scrollable:true
@@ -387,10 +384,10 @@ Crows.playPodcast=function(id,title,link){
  
 Crows.podcastTemplate=new Ext.XTemplate(
 	'<tpl for=".">'
-	,'<div class="episode" id="episode_{ItemId}" >'
-	,'<div class="thumbnail link" onclick="Crows.playPodcast(\'{ItemId}\',\'{[escape(values.title)]}\',\'{link}\');" style="background-image:url({thumbnail}/height/70);"><img src="images/play.png"></div>'
+	,'<div class="podcast" id="podcast_{ItemId}" style="width:100%;">'
+	,'<div class="thumbnail link" onclick="Crows.playPodcast(\'{ItemId}\',\'{[escape(values.title)]}\',\'{link}\');" style="background-image:url({thumbnail}/height/70);height:70px;width:70px;float:left;margin-right:10px;background-position:center;border:solid #000 1px;"><img style="margin-left:17px;margin-top:20px;border:none;" src="images/play.png"></div>'
 	,'<div class="info"><span class="title">{title}</span><!--{ItemId}--><br><span class="description">{description}</span> </div>'
-	,'<span class="link map_it" onclick="Crows.mapIt(\'episode\',\'{ItemId}\');"><!--add to map--></span></div>'
+	,'<span class="link map_it" onclick="Crows.mapIt(\'podcast\',\'{ItemId}\');">{[Crows.report_widget_text]}</span></div>'
 	,'</tpl>'	
 );
 
@@ -437,7 +434,6 @@ Crows.reportsTemplate=new Ext.XTemplate(
 ,'<div  class="report" onclick="Crows.launchReport(\'{id}\');">'
 ,'<span class="report_title link bold">{title}</span>&nbsp;&nbsp;'
 ,'<span class="crowdate">{date}</span>&nbsp;&nbsp;'
-//,'{report}'
 ,'{[Crows.reportTruncate(values.report)]}'
 ,'</div>'
 ,'</tpl>'
@@ -446,11 +442,10 @@ Crows.reportsTemplate=new Ext.XTemplate(
    
 
 Crows.mapIt=function(type,id){
-	var text=Ext.get(type+'_'+id).dom.innerHTML.replace(Crows.report_widget_text,'');
-	if(type=='tweet')Crows.contribute(escape(text),name);
-	//.replace(/report on-help map this/,'')
-	if(type=='flickr')Crows.contribute(escape(text),name);
 	
+	var text=Ext.get(type+'_'+id).dom.innerHTML.replace(Crows.report_widget_text,'');
+	Crows.contribute(escape(text),name);
+		
 } 
  
 Crows.enlargePhoto=function(url,title,owner,id){
@@ -518,7 +513,6 @@ Crows.reportsStore=new Ext.data.JsonStore({
 		url:'services/reports_proxy.php'
 		,autoLoad:false
 		,fields: ['id','name','location','lat','long','report','date','title','link','video','photo']
-		//,root:'results'
 		,id:'id'
 });
 
@@ -542,8 +536,6 @@ Crows.flickrPager=function(direction){
 	
 Crows.playEpisode=function playEpisode(episode_id,title,length){
 	title=unescape(title);
-	//location.href = "#" + episode_id;
-	//Ext.get('player').update(Crows.player_embed_code.replace(/root/g,'root/episode/'+episode_id+'.m4v'));
 	if(title)Ext.get('episode_title').update(title);
 
 }
@@ -600,13 +592,11 @@ Crows.makeMap=function(div) {
 		if(lat){
 			var point = new GLatLng(lat,long);
 		
-			//var myicon = new GIcon(G_DEFAULT_ICON);
+
 			if(blink!='blink')var myicon = new GIcon(iconred);
 			
 			if(blink=='blink')var myicon = new GIcon(blinkicon);
-			  //myicon.image = "http://esa.ilmari.googlepages.com/markeryellow.png";
-			  //myicon.iconSize = new GSize(32, 32);
-			  //myicon.iconAnchor = new GPoint(15, 32); 
+
 			
 			if (point){
 				var marker = new GMarker(point,{icon:myicon});
@@ -615,7 +605,7 @@ Crows.makeMap=function(div) {
 					if(html.length>2500){var width=600;}else{var width=300;}
 					if(html.length>2500){var font=10;}else{var font=12;}
 					
-			      marker.openInfoWindowHtml('<div style="font-size:'+font+'px;">'+html+'</div>');
+			      marker.openInfoWindowHtml('<div style="xwidth:'+width+'px;font-size:'+font+'px;">'+html+'</div>');
 			    });
 			}
 		}
@@ -636,7 +626,7 @@ Crows.bigMap=function(){
 	
 }
 
-//c1y_wo_4fuQ
+
 Crows.loadYoutube=function(video,title){
 	
 title=unescape(title);
@@ -678,20 +668,14 @@ Crows.youtubeWidget=function(){
 			var list='';
 			
 		    for(i=0;i<json.feed.entry.length;i++){
-				list+='<div class="youtube left" style="width:'+(Ext.get('youtube_playlist').getWidth()-30)+'px;">';
+				list+='<div id="youtube_'+i+'" class="youtube left" style="width:'+(Ext.get('youtube_playlist').getWidth()-30)+'px;">';
 				    var clean_title=json.feed.entry[i].media$group.media$title.$t;
 				    clean_title=escape(clean_title);
-					list+='<div class="thumbnail link left" style="background-image:url('+json.feed.entry[i].media$group.media$thumbnail[1].url+');background-position:50% 50%;" onclick="Crows.loadYoutube(\''+json.feed.entry[i].media$group.yt$videoid.$t+'\',\''+clean_title+'\')" >';
-					list+='<img class="play_button" src="images/play.png">';
+					list+='<div class=" link left" style="height:70px;width:70px;background-image:url('+json.feed.entry[i].media$group.media$thumbnail[1].url+');background-position:50% 50%;border:solid #000 1px;float:left!important;margin:3px;margin-right:7px;" onclick="Crows.loadYoutube(\''+json.feed.entry[i].media$group.yt$videoid.$t+'\',\''+clean_title+'\')" >';
+					list+='<img class="play_button" style="margin-left:17px;margin-top:20px;border:none;" src="images/play.png">';
 					list+='</div>';
-
-				//list+='<div class="left">'
-				list+='<span class="title bold">'+json.feed.entry[i].media$group.media$title.$t+'</span><br>';
-				  
-   
-			      
-					
-
+					list+='<span class="title bold">'+json.feed.entry[i].media$group.media$title.$t+'</span><br>';
+				 
 			    
                 if(json.feed.entry[i].published){
                 	
@@ -702,13 +686,13 @@ Crows.youtubeWidget=function(){
 					list+='<span class="crowdate">'+Ext.util.Format.date(mydate,'D F j, Y')+'</span>';
 
                 }
-                
+                  
                list+='<br><span class="description">'+json.feed.entry[i].media$group.media$description.$t+'</span>';
 	
-                
+               list+='<span class="map_it link report_link" onclick="Crows.mapIt(\'youtube\','+i+');">'+Crows.report_widget_text+'</span>';
 				list+='</div>';
 			}        
-			//Crows.loadYoutube(default_video_id);
+
 			
 			Ext.get('youtube_playlist').update(list);
 			
@@ -798,7 +782,7 @@ Crows.flickrWidget=function(){
 							,loadingText:'loading...'
 							,store:Crows.flickrStore
 							,tpl:Crows.flickrTemplate
-							//,width:980	
+							
 							
 	});
 	
@@ -833,11 +817,8 @@ Crows.twitterWidget=function(default_tag){
 					,frame:false
 				}
 				,new Ext.DataView({
-								//autoHeight:true
-							
+
 								renderTo:'twitter'
-								//,autoScroll:'true'
-								//,autoHeight:true
 								,height:Ext.get('twitter').getHeight()-25
 								,width:Ext.get('twitter').getWidth()-0
 								,id:'tweet_data'

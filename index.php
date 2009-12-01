@@ -44,13 +44,13 @@ if(!($_GET['nomobile'])) { mobile_device_detect(true,true,true,true,true,true,'m
     
 	<?=($map_key)?'<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key='.$map_key.'" type="text/javascript"></script>':'';?>
 
+	<?if($recaptcha && ((!$recaptcha_private_key)||(!$recaptcha_public_key)))die('You have recaptcha enabled but no keys set,  sign up for custom recaptcha keys by visiting http://recaptcha.net/api/getkey');?>
+	
 	
 	<script type="text/javascript" src="crows.js?ed=<?=rand();?>"></script>
 	<link rel="stylesheet" type="text/css"  href="crows.css">
 
 	<script>
-	
-	
 	
 	Crows.default_tag='<?=$hashtags[0];?>';
 	Crows.twitter=[<?
