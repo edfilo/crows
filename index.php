@@ -10,7 +10,7 @@ include_once('config.php');
 
 //mobile detection
 include('mobile_device_detect.php');
-if(!($_GET['nomobile'])) { mobile_device_detect(true,true,true,true,true,true,'mobile/index.php',false); }
+if(array_key_exists('nomobile', $_GET) && !($_GET['nomobile'])) { mobile_device_detect(true,true,true,true,true,true,'mobile/index.php',false); }
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-loose.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN"> 
@@ -22,8 +22,8 @@ if(!($_GET['nomobile'])) { mobile_device_detect(true,true,true,true,true,true,'m
 
 	<title><?=$page_title;?></title>
 	
-	<meta name="description" content="<?=$page_description;?>" />
-	<meta name="keywords" content="<?=$page_keywords;?>" />
+	<meta name="description" content="<?=$page_description; ?>" />
+	<meta name="keywords" content="<?= $page_keywords; ?>" />
 	<meta HTTP-EQUIV="Content-Language" CONTENT="EN" />
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 

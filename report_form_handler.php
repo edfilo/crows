@@ -31,7 +31,8 @@ if (!$resp->is_valid) {
 
 
 $report['location']=urlencode($_POST['location']);
-$report['headline']=$_POST['headline'];
+//TODO: change headline to title
+$report['title']=$_POST['headline'];
 $report['name']=$_POST['name'];
 $report['text']=$_POST['text'];
    
@@ -76,19 +77,32 @@ if (substr($data,0,3) == "200"){
 
 	
 $report['date']=date('D n/j/Y g:i a');
+$report['location'] = urldecode($report['location']);
 
   
-$line = $report['date'].'|'.$report['headline'].'|'.$report['name'].'|'.urldecode($report['location']).'|'.$report['latitude'].'|'.$report['longitude'].'|'.$report['text'].'|'.$report['link'].'|'.$report['image'].'|'.$report['embed'];
-  
+switch($database_type) {
+
+	case "csv":
+		$line = $report['date'].'|'.$report['title'].'|'.$report['name'].'|'.$report['location'].'|'.$report['latitude'].'|'.$report['longitude'].'|'.$report['text'].'|'.$report['link'].'|'.$report['image'].'|'.$report['embed'];
 
 
 
-$fp = fopen('reports.csv', 'a') or die('writefail');
 
-  
-    fputcsv($fp, split('\|', $line),'|');
+		$fp = fopen('reports.csv', 'a') or die('writefail');
 
-fclose($fp);
+
+		fputcsv($fp, split('\|', $line),'|');
+
+		fclose($fp);
+		break;
+	case "sqlite":
+			$dbhandle = new SQLite3('db/database.sqlite3');
+			//$dbhandle->exec("CREATE TABLE reports (id INTEGER PRIMARY KEY, date STRING, title STRING, name STRING, location STRING, lat STRING, long STRING, report STRING, link STRING, photo STRING, embed STRING");
+			//die("INSERT INTO reports (date, title, name, location, lat, long, report, link, photo, embed) values ('{$report['date']}','{$report['title']}','{$report['name']}','{$report['location']}','{$report['latitude']}','{$report['longitude']}','{$report['text']}','{$report['link']}','{$report['image']}','{$report['embed']}'");
+			$dbhandle->exec("INSERT INTO reports (date, title, name, location, lat, long, report, link, photo, embed) values ('{$report['date']}','{$report['title']}','{$report['name']}','{$report['location']}','{$report['latitude']}','{$report['longitude']}','{$report['text']}','{$report['link']}','{$report['image']}','{$report['embed']}')");
+
+		break;
+}
 
 echo('success');
 

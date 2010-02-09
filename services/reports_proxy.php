@@ -7,6 +7,8 @@
  */
 
 
+include_once('../config.php');
+header("Content-type: text/json");
 
 //php<5.2 json_encode  compatibility function
 
@@ -56,38 +58,53 @@ if (!function_exists('json_encode'))
   }
 }
 
+	switch($database_type) {
 
-	$row = 1;
-	
-	$rowcount=count(file("../reports.csv"));
-	
-	$handle = fopen("../reports.csv", "r");
-	
-	$i=1;
-    
-	if($rowcount==0){
-		$array[0]=array('id'=>1,'title'=>'No reports yet. Make the first!'); 
+		case "csv":
+			$row = 1;
+			
+			$rowcount=count(file("../reports.csv"));
+			
+			$handle = fopen("../reports.csv", "r");
+			
+			$i=1;
+				
+			if($rowcount==0){
+				$array[0]=array('id'=>1,'title'=>'No reports yet. Make the first!'); 
+			}
+			
+			while(($data = fgetcsv($handle, 0, "|"))!== FALSE) {
+				
+				$reports['id']=$i;
+				$reports['date']=$data[0].'';
+				$reports['title']=$data[1].'';
+				$reports['name']=$data[2].'';
+				$reports['location']=$data[3].'';
+				$reports['lat']=$data[4].'';
+				$reports['long']=$data[5].'';
+				$reports['report']=$data[6].'';
+				$reports['link']=$data[7].'';
+				$reports['photo']=$data[8].'';
+				$reports['embed']=$data[9].'';
+				$array[$i]=$reports;
+				$i++;
+			}
+		 
+			
+			$array=array_reverse($array);
+			break;
+		case "sqlite":
+			$dbhandle = new SQLite3('../db/database.sqlite3');
+			$result = $dbhandle->query('SELECT id, date, title, name, location, lat, long, report, link, photo, embed FROM reports');
+			while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+				$array[] = $row;
+			}
+			//foreach ($result as $entry) {
+				    //echo 'Name: ' . $entry['name'] . '  E-mail: ' . $entry['email'];
+			//}
+			break;
+
 	}
-	
-	while(($data = fgetcsv($handle, 0, "|"))!== FALSE) {
-		
-		$reports['id']=$i;
-		$reports['date']=$data[0].'';
-		$reports['title']=$data[1].'';
-		$reports['name']=$data[2].'';
-		$reports['location']=$data[3].'';
-		$reports['lat']=$data[4].'';
-		$reports['long']=$data[5].'';
-		$reports['report']=$data[6].'';
-		$reports['link']=$data[7].'';
-		$reports['photo']=$data[8].'';
-		$reports['embed']=$data[9].'';
-		$array[$i]=$reports;
-		$i++;
-	}
- 
-	
-	$array=array_reverse($array);
 	
 	print(json_encode($array));
 	

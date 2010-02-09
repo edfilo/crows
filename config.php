@@ -20,19 +20,19 @@
 */
     
 
-$widgets[]=array( type => "map", width => 1000, height=> 500, heading=>'Map');
+$widgets[]=array( 'type' => 'map', 'width' => 1000, 'height' => 500, 'heading' => 'Map');
          
-$widgets[]=array( type => "reports",width => 1000, height=> 370, heading=>'Public Reports');
+$widgets[]=array( 'type' => 'reports', 'width' => 1000, 'height' => 370, 'heading' => 'Public Reports');
 
-//$widgets[]=array( type => "player", width => 480, height=> 270, heading=>'');
+//$widgets[]=array( 'type' => 'player', 'width' => 480, 'height' => 270, 'heading' =>'');
         
-$widgets[]=array( type => "youtube_playlist", width => 485, height=> 400, heading=>'YouTube');
+$widgets[]=array( 'type' => 'youtube_playlist', 'width' => 485, 'height' => 400, 'heading' => 'YouTube');
 
-$widgets[]=array( type => "podcast_playlist", width => 485, height=> 400, heading=>'Podcast');
+$widgets[]=array( 'type' => 'podcast_playlist', 'width' => 485, 'height' => 400, 'heading' => 'Podcast');
 
-$widgets[]=array( type => "twitter", width => 1000, height=> 400, heading=>'Tweets');
+$widgets[]=array( 'type' => 'twitter', 'width' => 1000, 'height' => 400, 'heading' => 'Tweets');
             
-$widgets[]=array( type => "flickr",width => 1000, height=> 500, heading=>'Flickr');
+$widgets[]=array( 'type' => 'flickr', 'width' => 1000, 'height' => 500, 'heading' => 'Flickr');
 
   
 
@@ -55,6 +55,11 @@ $recaptcha_public_key = ''; // you get this from the signup page
 //editorial message or guidlines to reporters shown in report form
 $report_form_message='* Please do not paste text copied from other websites,  use the link field to link to that page.  Also place text from word documents into a blank notepad first and recopy to remove ugly formatting.';
 $report_widget_text = 'Add to map/Reports.';
+
+//database type, you probably want sqlite unless you don't have it installed
+//
+//valid options: "sqlite", "csv"
+$database_type = "sqlite";
 
   
 
