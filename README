@@ -45,4 +45,3 @@ upload contents  to your web directory
 make sure permissions are set to 666 in reports.csv
 edit config.php setting all the necessary values
 public reports can be edited or removed  reports.csv file
-
