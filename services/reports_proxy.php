@@ -96,12 +96,21 @@ if (!function_exists('json_encode'))
 		case "sqlite":
 			$dbhandle = new SQLite3('../db/database.sqlite3');
 			$result = $dbhandle->query('SELECT id, date, title, name, location, lat, long, report, link, photo, embed FROM reports');
-			while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-				$array[] = $row;
+			while ($data = $result->fetchArray(SQLITE3_ASSOC)) {
+				$reports['id']=$data['id'];
+				$reports['date']=$data['date'].'';
+				$reports['title']=$data['title'].'';
+				$reports['name']=$data['name'].'';
+				$reports['location']=$data['location'].'';
+				$reports['lat']=$data['lat'].'';
+				$reports['long']=$data['long'].'';
+				$reports['report']=$data['report'].'';
+				$reports['link']=$data['link'].'';
+				$reports['photo']=$data['photo'].'';
+				$reports['embed']=$data['embed'].'';
+				$array[]=$reports;
 			}
-			//foreach ($result as $entry) {
-				    //echo 'Name: ' . $entry['name'] . '  E-mail: ' . $entry['email'];
-			//}
+			$array = array_reverse($array);
 			break;
 
 	}
