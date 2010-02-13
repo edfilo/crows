@@ -75,7 +75,7 @@ $report_widget_text = 'Add to map/Reports.';
 //database type, you probably want sqlite unless you don't have it installed
 //
 //valid options: "sqlite", "csv"
-$database_type = "sqlite";
+$database_type = "csv";
 
 //main url, used for the link in the rss feed
 $main_url = "http://crowsne.st/";
@@ -139,11 +139,11 @@ $news_feed_url='http://example.com/news/feed/rss';
 // 'keywords' search youtube by keywords
 // 'user'  show all of a users uploaded videos 
 
-$youtube_mode='playlist';
+$youtube_mode='keywords';
 
 $youtube_user='CrowsCrowdSource';
 $youtube_keywords='crows';
-$youtube_playlist_id='9AE68C8042D171F0';
+//$youtube_playlist_id='9AE68C8042D171F0';
 
 //video order - possible values for orderby are 'relevance', 'published', 'viewCount' and 'rating'
 $youtube_orderby='rating';

@@ -102,9 +102,9 @@ echo "\n";
 foreach($array as $item) {
 	echo '		<item>';
 	echo "\n";
-	echo "			<title>{$item['title']}</title>";
+	echo "			<title><![CDATA[{$item['title']}]]></title>";
 	echo "\n";
-	echo "			<description>\"{$item['report']}\" - reported by {$item['name']}</description>";
+	echo "			<description><![CDATA[\"{$item['report']}\" - reported by {$item['name']}]]></description>";
 	echo "\n";
 	echo "			<pubDate>" . date(DATE_RFC2822, strtotime($item['date'])) . "</pubDate>";
 	echo "\n";

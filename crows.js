@@ -911,7 +911,7 @@ Crows.twitterWidget=function(default_tag){
 
 Crows.reportsWidget=function(){
 	 
-	Ext.get('reports_controls').update('<span class="link report_link" onclick="Crows.contribute();">add a report</span>');
+	Ext.get('reports_controls').update('<span class="link report_link" onclick="window.location=Crows.main_url+\'/rss\';">RSS</span>&nbsp;&nbsp;<span class="link report_link" onclick="Crows.contribute();">add a report</span>');
 	
 	new Ext.DataView({
 								//autoHeight:true

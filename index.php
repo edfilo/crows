@@ -86,6 +86,7 @@ if(array_key_exists('nomobile', $_GET) && !($_GET['nomobile'])) { mobile_device_
 	Crows.default_episode_id='<?=$default_episode_id;?>';
 	Crows.latitude=<?=$latitude;?>;
 	Crows.longitude=<?=$longitude;?>;
+	Crows.main_url='<?=$main_url;?>';
 	Crows.zoom=<?=$zoom;?>;
 	
 	<?=($default_map_type&&$map_key)?'Crows.default_map_type='.$default_map_type.';':'';?>
