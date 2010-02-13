@@ -35,6 +35,7 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 $result = curl_exec ($curl);
 curl_close ($curl);
 $result=str_replace('media:','',$result);
+$result=str_replace('blip:','',$result);
 print($result);
 
 ?>

@@ -14,7 +14,7 @@ if($youtube_playlist_id){
 $youtube_query_call='http://gdata.youtube.com/feeds/api/playlists/'.$youtube_playlist_id.'?start-index=1&max-results=50&v=2';
 }
 
-$youtube_query_call=$youtube_query_call.'&orderby='.$youtube_orderby;
+//$youtube_query_call=$youtube_query_call.'
 
 
 function youtubePlaylist($query){
@@ -29,8 +29,11 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 $result = curl_exec ($curl);
 curl_close ($curl);
 
+//echo($query)
 
 $xml = new SimpleXMLElement($result);
+
+
 	
 	foreach($xml->channel->item as $episode){
 
@@ -126,8 +129,9 @@ function report($story_id){
 
 
 <?function reportform(){
-	
-	global  $enable_public_reporting;
+	global $recaptcha_public_key;
+	global $enable_public_reporting;
+	global $recaptcha;
 	
 	?>
 
