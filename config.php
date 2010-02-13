@@ -76,6 +76,9 @@ $report_widget_text = 'Add to map/Reports.';
 //valid options: "sqlite", "csv"
 $database_type = "sqlite";
 
+//main url, used for the link in the rss feed
+$main_url = "http://crowsne.st/";
+
   
 
 /***************
