@@ -66,7 +66,7 @@ $flickr_enlarge_url=$_GET['flickr_enlarge_url'];
     	
     	?>
     		
-    		<?=($enable_public_reporting)?'<div class="mobile_row"> <a href="?view=reportform">Report<div class="more">&gt;</div></a></div>':''?>
+    		<?=($enable_public_reporting)?'<a href="?view=reportform"><div class="mobile_row"><div class="mobile_heading">Report</div><div class="more">&gt;</div></div></a>':''?>
     			
     		<?
     	
@@ -78,7 +78,7 @@ $flickr_enlarge_url=$_GET['flickr_enlarge_url'];
     		    switch($widget['type']){
     		    	case 'twitter':
 	    		    	foreach($hashtags as $hashtag){?>
-	    					 <a href="?view=twitter&hashtag=<?=urlencode($hashtag);?>"><div class="mobile_row"> <?=$hashtag;?> <?=$mobile_heading;?><div class="more">&gt;</div></div></a>
+	    					 <a href="?view=twitter&hashtag=<?=urlencode($hashtag);?>"><div class="mobile_row"><div class="mobile_heading"><?=$hashtag;?> <?=$mobile_heading;?></div><div class="more">&gt;</div></div></a>
 	    				<?}
 	    		    	break;
     		    	case 'player':
@@ -87,7 +87,7 @@ $flickr_enlarge_url=$_GET['flickr_enlarge_url'];
     		    	default:
     		    	?>
     		
-    			<a href="?view=<?=$widget['type'];?>"><div class="mobile_row"> <?=$mobile_heading;?><div class="more">&gt;</div></div></a>
+    			<a href="?view=<?=$widget['type'];?>"><div class="mobile_row"><div class="mobile_heading"><?=$mobile_heading;?></div><div class="more">&gt;</div></div></a>
     		<?
     		    	
     		    	

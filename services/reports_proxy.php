@@ -88,7 +88,12 @@ if (!function_exists('json_encode'))
  
 	
 	$array=array_reverse($array);
+
+	$reportdata=json_encode($array);
+       $reportdata=str_replace('\\\\\\"','\\"',$reportdata);
+       
+       $reportdata=str_replace("\\'","'",$reportdata);
 	
-	print(json_encode($array));
+	print($reportdata);
 	
 ?>

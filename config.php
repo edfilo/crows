@@ -19,6 +19,7 @@
 *    485 (single column widget) or 1000 (widgets span both columns)
 */
     
+$widgets[]=array( type => "news_reader",width => 1000, height=> 300, heading=>'News');
 
 $widgets[]=array( type => "map", width => 1000, height=> 500, heading=>'Map');
          
@@ -98,7 +99,11 @@ $top_right_heading='Top Right Heading';
 $top_right_html='top right text';
 
 
+/****************
+* rss news reader widget
+*/
 
+$news_feed_url='http://example.com/news/feed/rss';
 
 
 
