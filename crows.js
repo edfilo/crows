@@ -34,7 +34,7 @@ Crows.parseReport=function(index){
 	}  
 	  
 	if(report.data.photo){
-	
+	 
 		html+='<div><img src="'+report.data.photo+'"></div>';
 	}
 	
@@ -59,6 +59,7 @@ Crows.launchReport=function(index){
 		//id:'contribute_modal'
 		closeAction:'destroy'
 		//,y:100
+		//,animateTarget:'reports'
 		,anchorTo:'reports'
 		,id:'report_'+Math.random()
 		,autoHeight:true
@@ -71,6 +72,10 @@ Crows.launchReport=function(index){
 		,html:html
 	});
 	reportwin.show();
+	var position=reportwin.getPosition();
+	if (position[1]<50){
+		reportwin.setPosition(position[0],50);
+	}
 	
 };
 
