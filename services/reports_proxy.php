@@ -109,7 +109,6 @@ if (!function_exists('json_encode'))
 			}
 		 
 			
-			$array=array_reverse($array);
 			break;
 		case "sqlite":
 			$dbhandle = new SQLite3('../db/database.sqlite3');
@@ -128,7 +127,6 @@ if (!function_exists('json_encode'))
 				$reports['embed']=$data['embed'].'';
 				$array[]=$reports;
 			}
-			$array = array_reverse($array);
 			break;
 
 	}
